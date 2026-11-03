@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas - Gestión de Gimnasio</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+    <header>
+        <h1>Sistema de Gestión de Gimnasio</h1>
+        <p>Administración de reservas</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="socios.html">Socios</a>
+        <a href="clases.html">Clases</a>
+        <a href="reservas.html">Reservas</a>
+    </nav>
+
+    <main>
+        <h2>Gestión de reservas</h2>
+        <p>Desde esta sección se podrán registrar y consultar las reservas de los socios.</p>
+
+        <section class="tarjeta">
+            <h3>Registrar reserva</h3>
+
+            <form id="formReserva">
+                <p>
+                    <label for="claseId">ID de la clase:</label><br>
+                    <input type="number" id="claseId" min="1" required>
+                </p>
+
+                <p>
+                    <label for="socioDni">DNI del socio:</label><br>
+                    <input type="number" id="socioDni" required>
+                </p>
+
+                <button type="submit">Registrar reserva</button>
+            </form>
+        </section>
+
+        <section class="tarjeta">
+            <h3>Consultar reservas de una clase</h3>
+
+            <form id="formConsultarClase">
+                <p>
+                    <label for="consultaClaseId">ID de la clase:</label><br>
+                    <input type="number" id="consultaClaseId" min="1" required>
+                </p>
+
+                <button type="submit">Consultar reservas</button>
+            </form>
+
+            <div id="resultadoReservasClase"></div>
+        </section>
+
+        <section class="tarjeta">
+            <h3>Consultar reservas de un socio</h3>
+
+            <form id="formConsultarSocio">
+                <p>
+                    <label for="consultaSocioDni">DNI del socio:</label><br>
+                    <input type="number" id="consultaSocioDni" required>
+                </p>
+
+                <button type="submit">Consultar reservas</button>
+            </form>
+
+            <div id="resultadoReservasSocio"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Sistema de Gestión de Gimnasio - Proyecto académico</p>
+    </footer>
+
+</body>
+</html>

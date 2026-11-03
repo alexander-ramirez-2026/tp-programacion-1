@@ -1,0 +1,456 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Control</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+    <!-- INICIO DE SESIÓN -->
+
+    <div id="login-screen" class="login-container">
+        <div class="login-card">
+            <h1>GYM CONTROL</h1>
+            <p>Panel de gestión del gimnasio</p>
+
+            <form id="login-form">
+                <label for="api-key">Clave de acceso</label>
+                <input
+                    type="password"
+                    id="api-key"
+                    placeholder="Ingresá tu API Key"
+                    required
+                    autocomplete="off"
+                >
+                <button type="submit">Ingresar</button>
+                <p id="login-message" class="message"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- APLICACIÓN PRINCIPAL -->
+
+    <main id="app-screen" class="hidden">
+
+        <!-- MENÚ LATERAL -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+                <div class="brand-icon">G</div>
+                <div>
+                    <h2>GYM CONTROL</h2>
+                    <p>Administración</p>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <p class="sidebar-label">MENÚ PRINCIPAL</p>
+
+                <button type="button" class="nav-button active" data-section="inicio">
+                    <span>⌂</span> Inicio
+                </button>
+
+                <button
+                    type="button"
+                    class="nav-button admin-nav hidden"
+                    data-section="socios"
+                >
+                    <span>♙</span> Socios
+                </button>
+
+                <button
+                    type="button"
+                    class="nav-button admin-nav hidden"
+                    data-section="clases"
+                >
+                    <span>▦</span> Clases
+                </button>
+
+                <button type="button" class="nav-button" data-section="reservas">
+                    <span>▣</span> Reservas
+                </button>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="user-avatar">U</div>
+
+                <div class="user-information">
+                    <strong id="sidebar-user">Usuario</strong>
+                    <p id="sidebar-role">Conectado</p>
+                </div>
+
+                <button
+                    id="logout-button"
+                    type="button"
+                    class="logout-sidebar"
+                    title="Cerrar sesión"
+                >
+                    ↪
+                </button>
+            </div>
+
+        </aside>
+
+        <!-- CONTENIDO -->
+
+        <div class="main-content">
+
+            <header class="topbar">
+                <div>
+                    <p class="topbar-subtitle">SISTEMA DE GESTIÓN</p>
+                    <h1 id="page-title">Inicio</h1>
+                </div>
+
+                <div class="topbar-user">
+                    <span class="status-indicator"></span>
+                    <span id="user-role"></span>
+                </div>
+            </header>
+
+            <section class="dashboard">
+
+                <!-- INICIO -->
+
+                <section id="section-inicio" class="page-section">
+
+                    <div class="welcome">
+                        <h2>Bienvenido al gimnasio</h2>
+                        <p>Desde aquí podés gestionar las actividades del gimnasio.</p>
+                    </div>
+
+                    <div class="dashboard-cards admin-nav-content hidden" id="admin-panel">
+
+                        <article class="stat-card">
+                            <div class="stat-icon blue">♙</div>
+                            <h3>Socios</h3>
+                            <p>Administración de socios registrados.</p>
+                            <button type="button" data-section="socios">
+                                Gestionar socios
+                            </button>
+                        </article>
+
+                        <article class="stat-card">
+                            <div class="stat-icon purple">▦</div>
+                            <h3>Clases</h3>
+                            <p>Administración de clases disponibles.</p>
+                            <button type="button" data-section="clases">
+                                Gestionar clases
+                            </button>
+                        </article>
+
+                        <article class="stat-card">
+                            <div class="stat-icon green">▣</div>
+                            <h3>Reservas</h3>
+                            <p>Consultar y administrar las reservas.</p>
+                            <button type="button" data-section="reservas">
+                                Ver reservas
+                            </button>
+                        </article>
+
+                    </div>
+
+                    <div class="panel" id="socio-home-card">
+                        <h2>Reservas</h2>
+                        <p>Desde esta sección podés registrar y consultar reservas.</p>
+                        <button type="button" data-section="reservas">
+                            Ir a reservas
+                        </button>
+                    </div>
+
+                </section>
+
+                <!-- SOCIOS -->
+
+                <section id="section-socios" class="page-section hidden">
+
+                    <div class="section-heading">
+                        <h2>Gestión de socios</h2>
+                        <p>Registrá, consultá, modificá y eliminá socios.</p>
+                    </div>
+
+                    <section id="admin-socios-panel" class="panel hidden">
+
+                        <h2>Registrar socio</h2>
+
+                        <form id="formSocio">
+
+                            <label for="socioDni">DNI</label>
+                            <input
+                                type="number"
+                                id="socioDni"
+                                placeholder="Ingresá el DNI"
+                                required
+                            >
+
+                            <label for="socioNombre">Nombre</label>
+                            <input
+                                type="text"
+                                id="socioNombre"
+                                placeholder="Nombre del socio"
+                                required
+                            >
+
+                            <label for="socioApellido">Apellido</label>
+                            <input
+                                type="text"
+                                id="socioApellido"
+                                placeholder="Apellido del socio"
+                                required
+                            >
+
+                            <label for="socioFecha">Fecha de nacimiento</label>
+                            <input
+                                type="date"
+                                id="socioFecha"
+                                required
+                            >
+
+                            <button type="submit" id="btnGuardarSocio">
+                                Registrar socio
+                            </button>
+
+                            <button
+                                type="button"
+                                id="btnCancelarSocio"
+                                class="secondary-button"
+                                hidden
+                            >
+                                Cancelar edición
+                            </button>
+
+                        </form>
+
+                        <div class="divider"></div>
+
+                        <h3>Socios registrados</h3>
+
+                        <button type="button" id="btnConsultarSocios">
+                            Consultar socios
+                        </button>
+
+                        <div id="resultadoSocios" class="table-container"></div>
+
+                        <p id="mensajeSocios" class="message"></p>
+
+                    </section>
+
+                </section>
+
+                <!-- CLASES -->
+
+                <section id="section-clases" class="page-section hidden">
+
+                    <div class="section-heading">
+                        <h2>Gestión de clases</h2>
+                        <p>Administrá las actividades y sus cupos.</p>
+                    </div>
+
+                    <section class="panel" id="admin-panel-clases">
+
+                        <input type="hidden" id="apiKey">
+
+                        <h2>Registrar o modificar clase</h2>
+
+                        <form id="formClase">
+
+                            <input type="hidden" id="claseId">
+
+                            <label for="nombre">Nombre de la clase</label>
+                            <input
+                                type="text"
+                                id="nombre"
+                                placeholder="Ejemplo: Musculación"
+                                required
+                            >
+
+                            <label for="instructor">Instructor</label>
+                            <input
+                                type="text"
+                                id="instructor"
+                                placeholder="Nombre del instructor"
+                                required
+                            >
+
+                            <label for="horario">Horario</label>
+                            <input
+                                type="text"
+                                id="horario"
+                                placeholder="Ejemplo: Lunes 18:00"
+                                required
+                            >
+
+                            <label for="cupo">Cupo máximo</label>
+                            <input
+                                type="number"
+                                id="cupo"
+                                min="1"
+                                placeholder="Cantidad de personas"
+                                required
+                            >
+
+                            <label for="edadMinima">Edad mínima</label>
+                            <input
+                                type="number"
+                                id="edadMinima"
+                                min="0"
+                                placeholder="Opcional"
+                            >
+
+                            <label for="edadMaxima">Edad máxima</label>
+                            <input
+                                type="number"
+                                id="edadMaxima"
+                                min="0"
+                                placeholder="Opcional"
+                            >
+
+                            <button type="submit" id="btnGuardar">
+                                Registrar clase
+                            </button>
+
+                            <button
+                                type="button"
+                                id="btnCancelarEdicion"
+                                class="secondary-button"
+                                hidden
+                            >
+                                Cancelar edición
+                            </button>
+
+                        </form>
+
+                        <p id="tituloFormulario">Registrar clase</p>
+
+                        <div class="divider"></div>
+
+                        <h3>Clases disponibles</h3>
+
+                        <button type="button" id="btnConsultar">
+                            Consultar clases
+                        </button>
+
+                        <div id="resultadoClases" class="table-container"></div>
+
+                        <p id="mensaje" class="message"></p>
+
+                    </section>
+
+                </section>
+
+                <!-- RESERVAS -->
+
+                <section id="section-reservas" class="page-section hidden">
+
+                    <div class="section-heading">
+                        <h2>Gestión de reservas</h2>
+                        <p>Registrá y consultá las reservas del gimnasio.</p>
+                    </div>
+
+                    <section id="socio-panel" class="panel hidden">
+
+                        <h2>Registrar una reserva</h2>
+                        <p>Completá los datos para reservar un lugar en una clase.</p>
+
+                        <form id="create-reservation-form">
+
+                            <label for="reservation-dni">DNI del socio</label>
+                            <input
+                                type="number"
+                                id="reservation-dni"
+                                placeholder="Ingresá el DNI"
+                                required
+                            >
+
+                            <label for="reservation-class">ID de la clase</label>
+                            <input
+                                type="number"
+                                id="reservation-class"
+                                min="1"
+                                placeholder="Ingresá el ID de la clase"
+                                required
+                            >
+
+                            <button type="submit">Confirmar reserva</button>
+
+                        </form>
+
+                        <div class="divider"></div>
+
+                        <h2>Consultar reservas de un socio</h2>
+
+                        <form id="my-reservations-form">
+
+                            <label for="socio-dni">DNI del socio</label>
+                            <input
+                                type="number"
+                                id="socio-dni"
+                                placeholder="Ingresá el DNI"
+                                required
+                            >
+
+                            <button type="submit">Consultar reservas</button>
+
+                        </form>
+
+                    </section>
+
+                    <section id="admin-reservations-panel" class="panel hidden">
+
+                        <h2>Reservas por clase</h2>
+                        <p>Consultá los socios que reservaron una clase.</p>
+
+                        <form id="class-search-form">
+
+                            <label for="class-id">ID de la clase</label>
+                            <input
+                                type="number"
+                                id="class-id"
+                                min="1"
+                                placeholder="Ingresá el ID de la clase"
+                                required
+                            >
+
+                            <button type="submit">Consultar reservas</button>
+
+                        </form>
+
+                    </section>
+
+                </section>
+
+                <!-- RESULTADOS GENERALES -->
+
+                <section class="panel results-panel">
+
+                    <h2>Resultados del sistema</h2>
+                    <p>Aquí aparecerán las consultas y confirmaciones.</p>
+
+                    <div id="results">
+                        <p>Todavía no hay resultados para mostrar.</p>
+                    </div>
+
+                    <div id="resultado-reservas"></div>
+
+                    <p id="app-message" class="message"></p>
+
+                </section>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- JAVASCRIPT -->
+
+    <script src="clases.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>

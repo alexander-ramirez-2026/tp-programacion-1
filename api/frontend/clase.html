@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases - Gestión de Gimnasio</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+    <header>
+        <h1>Sistema de Gestión de Gimnasio</h1>
+        <p>Administración de clases</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="clase.html">Clases</a>
+    </nav>
+
+    <main>
+        <h2>Gestión de clases</h2>
+        <p>Desde esta sección se podrán registrar, consultar, modificar y cancelar clases.</p>
+
+        <section>
+            <h3>Autenticación de administrador</h3>
+
+            <label for="apiKey">API Key:</label><br>
+            <input type="password" id="apiKey" placeholder="Ingrese la clave de administrador">
+        </section>
+
+        <section>
+            <h3 id="tituloFormulario">Registrar clase</h3>
+
+            <form id="formClase">
+
+                <input type="hidden" id="claseId">
+
+                <p>
+                    <label for="nombre">Nombre de la clase:</label><br>
+                    <input type="text" id="nombre" required>
+                </p>
+
+                <p>
+                    <label for="instructor">Instructor:</label><br>
+                    <input type="text" id="instructor" required>
+                </p>
+
+                <p>
+                    <label for="horario">Horario:</label><br>
+                    <input type="text" id="horario" placeholder="Ej: Martes 18 a 19hs" required>
+                </p>
+
+                <p>
+                    <label for="cupo">Cupo máximo:</label><br>
+                    <input type="number" id="cupo" min="1" required>
+                </p>
+
+                <p>
+                    <label for="edadMinima">Edad mínima (opcional):</label><br>
+                    <input type="number" id="edadMinima" min="0">
+                </p>
+
+                <p>
+                    <label for="edadMaxima">Edad máxima (opcional):</label><br>
+                    <input type="number" id="edadMaxima" min="0">
+                </p>
+
+                <button type="submit" id="btnGuardar">Registrar clase</button>
+                <button type="button" id="btnCancelarEdicion" hidden>Cancelar edición</button>
+
+            </form>
+
+            <p id="mensaje"></p>
+        </section>
+
+        <section>
+            <h3>Clases disponibles</h3>
+
+            <button type="button" id="btnConsultar">Consultar clases</button>
+
+            <div id="resultadoClases"></div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Sistema de Gestión de Gimnasio - Proyecto académico</p>
+    </footer>
+
+    <script src="js/clases.js"></script>
+
+</body>
+</html>

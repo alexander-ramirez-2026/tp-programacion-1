@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socios - Gestión de Gimnasio</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+    <header>
+        <h1>Sistema de Gestión de Gimnasio</h1>
+        <p>Administración de socios</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="socios.html">Socios</a>
+        <a href="clases.html">Clases</a>
+        <a href="reservas.html">Reservas</a>
+    </nav>
+
+    <main>
+        <h2>Gestión de socios</h2>
+        <p>Desde esta sección se podrán registrar y consultar los socios del gimnasio.</p>
+
+        <section class="tarjeta">
+            <h3>Registrar socio</h3>
+
+            <form id="formSocio">
+                <p>
+                    <label for="dni">DNI:</label><br>
+                    <input type="number" id="dni" required>
+                </p>
+
+                <p>
+                    <label for="nombre">Nombre:</label><br>
+                    <input type="text" id="nombre" required>
+                </p>
+
+                <p>
+                    <label for="apellido">Apellido:</label><br>
+                    <input type="text" id="apellido" required>
+                </p>
+
+                <p>
+                    <label for="fecha">Fecha de nacimiento:</label><br>
+                    <input type="date" id="fecha" required>
+                </p>
+
+                <button type="submit">Registrar socio</button>
+            </form>
+        </section>
+
+        <section class="tarjeta">
+            <h3>Socios registrados</h3>
+            <p>En esta sección aparecerá el listado de socios guardados en el sistema.</p>
+
+            <button type="button" id="btnConsultar">Consultar socios</button>
+
+            <div id="resultadoSocios"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Sistema de Gestión de Gimnasio - Proyecto académico</p>
+    </footer>
+
+</body>
+</html>
