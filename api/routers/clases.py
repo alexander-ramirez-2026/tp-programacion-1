@@ -11,7 +11,7 @@ router = APIRouter(prefix="/clases", tags=["Clases"])
 # BUSCAR UNA CLASE POR ID
 def _obtener_clase(cursor, clase_id: int):
     cursor.execute(
-        "SELECT * FROM clases WHERE id = ?",
+        "SELECT * FROM clases WHERE id = %s",
         (clase_id,)
     )
     return cursor.fetchone()
@@ -73,7 +73,7 @@ def crear_clase(
             INSERT INTO clases
                 (nombre, instructor, horario, cupo_maximo,
                  edad_minima, edad_maxima)
-            VALUES (?, ?, ?, ?, ?, ?)
+            VALUES (%s, %s, %s, %s, %s, %s)
             """,
             (
                 clase.nombre,
@@ -125,13 +125,13 @@ def actualizar_clase(
         cursor.execute(
             """
             UPDATE clases
-            SET nombre = ?,
-                instructor = ?,
-                horario = ?,
-                cupo_maximo = ?,
-                edad_minima = ?,
-                edad_maxima = ?
-            WHERE id = ?
+            SET nombre = %s,
+                instructor = %s,
+                horario = %s,
+                cupo_maximo = %s,
+                edad_minima = %s,
+                edad_maxima = %s
+            WHERE id = %s
             """,
             (
                 clase.nombre,
@@ -180,7 +180,7 @@ def cancelar_clase(
             )
 
         cursor.execute(
-            "UPDATE clases SET cancelada = 1 WHERE id = ?",
+            "UPDATE clases SET cancelada = 1 WHERE id = %s",
             (clase_id,)
         )
 

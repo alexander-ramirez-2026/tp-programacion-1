@@ -54,7 +54,7 @@ def crear_reserva(
 
         # VERIFICAR QUE LA CLASE EXISTA
         cursor.execute(
-            "SELECT * FROM clases WHERE id = ?",
+            "SELECT * FROM clases WHERE id = %s",
             (clase_id,)
         )
 
@@ -75,7 +75,7 @@ def crear_reserva(
 
         # VERIFICAR QUE EL SOCIO EXISTA
         cursor.execute(
-            "SELECT * FROM socios WHERE dni = ?",
+            "SELECT * FROM socios WHERE dni = %s",
             (socio_dni,)
         )
 
@@ -92,7 +92,7 @@ def crear_reserva(
             """
             SELECT COUNT(*) AS cantidad
             FROM reservas
-            WHERE clase_id = ? AND socio_dni = ?
+            WHERE clase_id = %s AND socio_dni = %s
             """,
             (clase_id, socio_dni)
         )
@@ -108,7 +108,7 @@ def crear_reserva(
             """
             SELECT COUNT(*) AS cantidad
             FROM reservas
-            WHERE clase_id = ?
+            WHERE clase_id = %s
             """,
             (clase_id,)
         )
@@ -152,7 +152,7 @@ def crear_reserva(
         cursor.execute(
             """
             INSERT INTO reservas (clase_id, socio_dni)
-            VALUES (?, ?)
+            VALUES (%s, %s)
             """,
             (clase_id, socio_dni)
         )
@@ -197,7 +197,7 @@ def cancelar_reserva(
 
         # VERIFICAR QUE LA RESERVA EXISTA
         cursor.execute(
-            "SELECT * FROM reservas WHERE id = ?",
+            "SELECT * FROM reservas WHERE id = %s",
             (reserva_id,)
         )
 
@@ -211,7 +211,7 @@ def cancelar_reserva(
 
         # ELIMINAR LA RESERVA
         cursor.execute(
-            "DELETE FROM reservas WHERE id = ?",
+            "DELETE FROM reservas WHERE id = %s",
             (reserva_id,)
         )
 
@@ -252,7 +252,7 @@ def obtener_reservas_clase(
         cursor = conexion.cursor()
 
         cursor.execute(
-            "SELECT id FROM clases WHERE id = ?",
+            "SELECT id FROM clases WHERE id = %s",
             (clase_id,)
         )
 
@@ -274,7 +274,7 @@ def obtener_reservas_clase(
                 s.apellido
             FROM reservas r
             JOIN socios s ON r.socio_dni = s.dni
-            WHERE r.clase_id = ?
+            WHERE r.clase_id = %s
             """,
             (clase_id,)
         )
@@ -310,7 +310,7 @@ def obtener_reservas_socio(
         cursor = conexion.cursor()
 
         cursor.execute(
-            "SELECT dni FROM socios WHERE dni = ?",
+            "SELECT dni FROM socios WHERE dni = %s",
             (dni,)
         )
 
@@ -332,7 +332,7 @@ def obtener_reservas_socio(
                 c.horario
             FROM reservas r
             JOIN clases c ON r.clase_id = c.id
-            WHERE r.socio_dni = ?
+            WHERE r.socio_dni = %s
             """,
             (dni,)
         )

@@ -1,6 +1,6 @@
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlite3 import IntegrityError
+from mysql.connector import Error as IntegrityError
 
 from api.auth import require_admin
 from api.database import get_connection
@@ -39,7 +39,7 @@ def obtener_socio(dni: int, rol: str = Depends(require_admin)):
         cursor = conexion.cursor()
 
         cursor.execute(
-            "SELECT * FROM socios WHERE dni = ?",
+            "SELECT * FROM socios WHERE dni = %s",
             (dni,)
         )
 
@@ -67,7 +67,7 @@ def crear_socio(datos: Socio, rol: str = Depends(require_admin)):
 
         query = """
             INSERT INTO socios (dni, nombre, apellido, fecha_nacimiento)
-            VALUES (?, ?, ?, ?)
+            VALUES (%s, %s, %s, %s)
         """
 
         cursor.execute(query, (
@@ -115,7 +115,7 @@ def actualizar_socio(
         cursor = conexion.cursor()
 
         cursor.execute(
-            "SELECT dni FROM socios WHERE dni = ?",
+            "SELECT dni FROM socios WHERE dni = %s",
             (dni,)
         )
 
@@ -127,8 +127,8 @@ def actualizar_socio(
 
         query = """
             UPDATE socios
-            SET nombre = ?, apellido = ?, fecha_nacimiento = ?
-            WHERE dni = ?
+            SET nombre = %s, apellido = %s, fecha_nacimiento = %s
+            WHERE dni = %s
         """
 
         cursor.execute(query, (
@@ -160,7 +160,7 @@ def eliminar_socio(dni: int, rol: str = Depends(require_admin)):
         cursor = conexion.cursor()
 
         cursor.execute(
-            "DELETE FROM socios WHERE dni = ?",
+            "DELETE FROM socios WHERE dni = %s",
             (dni,)
         )
 
